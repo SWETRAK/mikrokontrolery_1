@@ -1,0 +1,56 @@
+0000002A  CLR R1		Clear Register 
+0000002B  OUT 0x3F,R1		Out to I/O location 
+0000002C  LDI R28,0x5F		Load immediate 
+0000002D  LDI R29,0x08		Load immediate 
+0000002E  OUT 0x3E,R29		Out to I/O location 
+0000002F  OUT 0x3D,R28		Out to I/O location 
+00000030  CALL 0x00000054		Call subroutine 
+00000032  JMP 0x0000005A		Jump 
+00000034  JMP 0x00000000		Jump 
+--- C:\Users\Student_PL\Desktop\lab2\KamilPietrak\KamilPietrak\Debug/.././main.c 
+void z3() {
+	PORTA = 0;
+00000036  OUT 0x1B,R1		Out to I/O location 
+	for(uint8_t i = 8; i>0; i--){
+00000037  LDI R18,0x08		Load immediate 
+00000038  RJMP PC+0x0019		Relative jump 
+		PORTA |= (1<<(i-1));
+00000039  IN R19,0x1B		In from I/O location 
+0000003A  MOV R20,R18		Copy register 
+0000003B  LDI R21,0x00		Load immediate 
+0000003C  SUBI R20,0x01		Subtract immediate 
+0000003D  SBC R21,R1		Subtract with carry 
+0000003E  LDI R24,0x01		Load immediate 
+0000003F  LDI R25,0x00		Load immediate 
+00000040  RJMP PC+0x0003		Relative jump 
+00000041  LSL R24		Logical Shift Left 
+00000042  ROL R25		Rotate Left Through Carry 
+00000043  DEC R20		Decrement 
+00000044  BRPL PC-0x03		Branch if plus 
+00000045  OR R24,R19		Logical OR 
+00000046  OUT 0x1B,R24		Out to I/O location 
+--- c:\program files (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util/delay.h 
+	__builtin_avr_delay_cycles(__ticks_dc);
+00000047  LDI R19,0x3F		Load immediate 
+00000048  LDI R24,0x0D		Load immediate 
+00000049  LDI R25,0x03		Load immediate 
+0000004A  SUBI R19,0x01		Subtract immediate 
+0000004B  SBCI R24,0x00		Subtract immediate with carry 
+0000004C  SBCI R25,0x00		Subtract immediate with carry 
+0000004D  BRNE PC-0x03		Branch if not equal 
+0000004E  RJMP PC+0x0001		Relative jump 
+0000004F  NOP 		No operation 
+--- C:\Users\Student_PL\Desktop\lab2\KamilPietrak\KamilPietrak\Debug/.././main.c 
+	for(uint8_t i = 8; i>0; i--){
+00000050  SUBI R18,0x01		Subtract immediate 
+--- No source file -------------------------------------------------------------
+00000051  CPSE R18,R1		Compare, skip if equal 
+00000052  RJMP PC-0x0019		Relative jump 
+00000053  RET 		Subroutine return 
+00000054  SER R24		Set Register 
+00000055  OUT 0x1A,R24		Out to I/O location 
+00000056  OUT 0x1B,R1		Out to I/O location 
+00000057  CALL 0x00000036		Call subroutine 
+00000059  RJMP PC-0x0002		Relative jump 
+0000005A  CLI 		Global Interrupt Disable 
+0000005B  RJMP PC-0x0000		Relative jump 

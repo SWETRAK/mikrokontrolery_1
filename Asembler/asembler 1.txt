@@ -1,0 +1,117 @@
+--- ../../../../crt1/gcrt1.S ---------------------------------------------------
+0000002A  CLR R1		Clear Register 
+0000002B  OUT 0x3F,R1		Out to I/O location 
+0000002C  LDI R28,0x5F		Load immediate 
+0000002D  LDI R29,0x08		Load immediate 
+0000002E  OUT 0x3E,R29		Out to I/O location 
+0000002F  OUT 0x3D,R28		Out to I/O location 
+00000030  CALL 0x00000088		Call subroutine 
+00000032  JMP 0x0000008E		Jump 
+00000034  JMP 0x00000000		Jump 
+--- C:\Users\Student_PL\Desktop\lab2\KamilPietrak\KamilPietrak\Debug/.././main.c 
+void z1() {
+	// Zapalanie i gaszenie od 7 do 0 co pol sekundy
+	for(uint8_t i = 7; i>0; i--){
+00000036  LDI R18,0x07		Load immediate 
+00000037  RJMP PC+0x0026		Relative jump 
+		PORTA |= (1<<i)|(1<<(i-1)); // Zapalanie diod 
+00000038  IN R19,0x1B		In from I/O location 
+00000039  MOV R20,R18		Copy register 
+0000003A  LDI R21,0x00		Load immediate 
+0000003B  LDI R24,0x01		Load immediate 
+0000003C  LDI R25,0x00		Load immediate 
+0000003D  MOVW R22,R24		Copy register pair 
+--- C:\Users\Student_PL\Desktop\lab2\KamilPietrak\KamilPietrak\Debug/.././main.c 
+0000003E  MOV R0,R18		Copy register 
+0000003F  RJMP PC+0x0003		Relative jump 
+00000040  LSL R22		Logical Shift Left 
+00000041  ROL R23		Rotate Left Through Carry 
+00000042  DEC R0		Decrement 
+00000043  BRPL PC-0x03		Branch if plus 
+00000044  SUBI R20,0x01		Subtract immediate 
+00000045  SBC R21,R1		Subtract with carry 
+00000046  RJMP PC+0x0003		Relative jump 
+00000047  LSL R24		Logical Shift Left 
+00000048  ROL R25		Rotate Left Through Carry 
+00000049  DEC R20		Decrement 
+0000004A  BRPL PC-0x03		Branch if plus 
+0000004B  OR R24,R22		Logical OR 
+0000004C  MOV R25,R19		Copy register 
+0000004D  OR R25,R24		Logical OR 
+0000004E  OUT 0x1B,R25		Out to I/O location 
+--- c:\program files (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util/delay.h 
+	__builtin_avr_delay_cycles(__ticks_dc);
+0000004F  LDI R19,0x9F		Load immediate 
+00000050  LDI R20,0x86		Load immediate 
+00000051  LDI R25,0x01		Load immediate 
+00000052  SUBI R19,0x01		Subtract immediate 
+00000053  SBCI R20,0x00		Subtract immediate with carry 
+00000054  SBCI R25,0x00		Subtract immediate with carry 
+00000055  BRNE PC-0x03		Branch if not equal 
+00000056  RJMP PC+0x0001		Relative jump 
+00000057  NOP 		No operation 
+--- C:\Users\Student_PL\Desktop\lab2\KamilPietrak\KamilPietrak\Debug/.././main.c 
+		PORTA &= ~((1<<i)|(1<<(i-1))); // Gaszenie diod
+00000058  IN R25,0x1B		In from I/O location 
+00000059  COM R24		One's complement 
+0000005A  AND R24,R25		Logical AND 
+0000005B  OUT 0x1B,R24		Out to I/O location 
+	for(uint8_t i = 7; i>0; i--){
+0000005C  SUBI R18,0x01		Subtract immediate 
+--- No source file -------------------------------------------------------------
+0000005D  CPSE R18,R1		Compare, skip if equal 
+0000005E  RJMP PC-0x0026		Relative jump 
+0000005F  RJMP PC+0x0026		Relative jump 
+00000060  IN R19,0x1B		In from I/O location 
+00000061  MOV R20,R18		Copy register 
+00000062  LDI R21,0x00		Load immediate 
+00000063  LDI R24,0x01		Load immediate 
+00000064  LDI R25,0x00		Load immediate 
+00000065  MOVW R22,R24		Copy register pair 
+00000066  MOV R0,R18		Copy register 
+00000067  RJMP PC+0x0003		Relative jump 
+00000068  LSL R22		Logical Shift Left 
+00000069  ROL R23		Rotate Left Through Carry 
+0000006A  DEC R0		Decrement 
+0000006B  BRPL PC-0x03		Branch if plus 
+0000006C  SUBI R20,0xFF		Subtract immediate 
+0000006D  SBCI R21,0xFF		Subtract immediate with carry 
+0000006E  RJMP PC+0x0003		Relative jump 
+0000006F  LSL R24		Logical Shift Left 
+00000070  ROL R25		Rotate Left Through Carry 
+00000071  DEC R20		Decrement 
+00000072  BRPL PC-0x03		Branch if plus 
+00000073  OR R24,R22		Logical OR 
+00000074  MOV R25,R19		Copy register 
+00000075  OR R25,R24		Logical OR 
+00000076  OUT 0x1B,R25		Out to I/O location 
+--- c:\program files (x86)\atmel\studio\7.0\toolchain\avr8\avr8-gnu-toolchain\avr\include\util/delay.h 
+	__builtin_avr_delay_cycles(__ticks_dc);
+00000077  LDI R19,0x3F		Load immediate 
+00000078  LDI R20,0x0D		Load immediate 
+00000079  LDI R25,0x03		Load immediate 
+0000007A  SUBI R19,0x01		Subtract immediate 
+0000007B  SBCI R20,0x00		Subtract immediate with carry 
+0000007C  SBCI R25,0x00		Subtract immediate with carry 
+0000007D  BRNE PC-0x03		Branch if not equal 
+0000007E  RJMP PC+0x0001		Relative jump 
+0000007F  NOP 		No operation 
+--- C:\Users\Student_PL\Desktop\lab2\KamilPietrak\KamilPietrak\Debug/.././main.c 
+		PORTA &= ~((1<<i)|(1<<(i+1))); // Gaszenie diod
+00000080  IN R25,0x1B		In from I/O location 
+00000081  COM R24		One's complement 
+00000082  AND R24,R25		Logical AND 
+00000083  OUT 0x1B,R24		Out to I/O location 
+	for(uint8_t i = 0; i<7; i++){
+00000084  SUBI R18,0xFF		Subtract immediate 
+--- No source file -------------------------------------------------------------
+00000085  CPI R18,0x07		Compare with immediate 
+00000086  BRCS PC-0x26		Branch if carry set 
+00000087  RET 		Subroutine return 
+00000088  SER R24		Set Register 
+00000089  OUT 0x1A,R24		Out to I/O location 
+0000008A  OUT 0x1B,R1		Out to I/O location 
+0000008B  CALL 0x00000036		Call subroutine 
+0000008D  RJMP PC-0x0002		Relative jump 
+0000008E  CLI 		Global Interrupt Disable 
+0000008F  RJMP PC-0x0000		Relative jump 
